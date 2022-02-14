@@ -1,0 +1,66 @@
+package br.com.politica.controller.form;
+
+import java.time.LocalDate;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import br.com.politica.modelo.Ideologia;
+import br.com.politica.modelo.Partido;
+import br.com.politica.repository.PartidoRepository;
+
+public class AtualizacaoPartidoForm {
+
+	@NotNull
+	@NotEmpty
+	private String nomePartido;
+	@NotNull
+	@NotEmpty
+	private String sigla;
+	@NotNull
+	private Ideologia ideologia;
+	@NotNull
+	private LocalDate dataFundacao;
+
+	public String getNomePartido() {
+		return nomePartido;
+	}
+
+	public void setNomePartido(String nomePartido) {
+		this.nomePartido = nomePartido;
+	}
+
+	public String getSigla() {
+		return sigla;
+	}
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
+	}
+
+	public Ideologia getIdeologia() {
+		return ideologia;
+	}
+
+	public void setIdeologia(Ideologia ideologia) {
+		this.ideologia = ideologia;
+	}
+
+	public LocalDate getDataFundacao() {
+		return dataFundacao;
+	}
+
+	public void setDataFundacao(LocalDate dataFundacao) {
+		this.dataFundacao = dataFundacao;
+	}
+
+	public Partido atualizar(Long id, PartidoRepository partidoRepository) {
+		Partido partido = partidoRepository.getById(id);
+		partido.setNomePartido(nomePartido);
+		partido.setSigla(sigla);
+		partido.setIdeologia(ideologia);
+		partido.setDataFundacao(dataFundacao);
+		return partido;
+	}
+
+}
